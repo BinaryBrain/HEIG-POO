@@ -3,11 +3,11 @@ public class Int {
 	private int value;
 
 	public Int() {
-		
+		value = 0;
 	}
 	
 	public Int(int val) {
-		setValue(value);
+		value = val;
 	}
 
 	public int getValue() {
@@ -19,6 +19,12 @@ public class Int {
 	}
 	
 	public String toString() {
-		return String.valueOf(getValue());
+		return String.valueOf(value);
+	}
+	
+	public void swapValueWith(Int i) {
+		int temp = value;
+		setValue(i.getValue());
+		i.setValue(temp);
 	}
 }
