@@ -1,3 +1,4 @@
+package Main;
 /**
  * 
  * This class represent a boolean square matrix of fixed size, with mutable elements.

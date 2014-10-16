@@ -1,3 +1,5 @@
+package Operations;
+import Main.Matrix;
 
 public abstract class Operation {
 	public Matrix executeOperation(Matrix a, Matrix b) {
@@ -13,5 +15,5 @@ public abstract class Operation {
 		return result;
 	}
 	
-	public abstract boolean execute(boolean a, boolean b);
+	protected abstract boolean execute(boolean a, boolean b);
 }
