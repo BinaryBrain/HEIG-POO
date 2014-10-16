@@ -6,12 +6,17 @@ import Operations.Xor;
 
 public class Launcher {
 	public static void main(String[] args) {
-		System.out.println("Welcome to the Matrix Generator!");
+		String banner = 
+		".  .   .                 ,      , .       .  .    ,        |\n"+
+		"|  | _ | _. _ ._ _  _   -+-_   -+-|_  _   |\\/| _ -+-._.*\\./|\n"+ 
+		"|/\\|(/,|(_.(_)[ | )(/,   |(_)   | [ )(/,  |  |(_] | |  |/'\\*\n"+
+		"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 		
 		int size = 4;
 		Matrix m1 = new Matrix(size);
 		Matrix m2 = new Matrix(size);
 		
+		System.out.println(banner);
 		System.out.println("Matrix one");
 		System.out.println(m1);
 		System.out.println("Matrix two");
