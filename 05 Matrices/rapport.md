@@ -7,15 +7,15 @@ Introduction
 -------
 Le but de ce laboratoire est d'implémenter des opérations de base sur des matrices carrées de booléens, de manière dynamique sans effectuer de tests sur le type des opérations utilisées. Les opérations de base sont `And`, `Or` et `Xor`.
 
-Methodologie
+Méthodologie
 -------
-Pour réaliser cela, nous avons créé un objet `Matrix` qui stocke le tableau de tableau de `boolean`. Au moment de la création (constructeur), la taille fixe est passée en paramètre, puis le tableau de tableau est automatiquement rempli aléatoirement Cette classe contient des accesseurs (getters) et des modifieurs (setters), permettant d'accéder aux éléments et de les modifier, par leur position dans la matrice. Par ailleurs, la méthode `toString()` est redéfinie pour afficher correctement la matrice comme demandé.
+Pour réaliser cela, nous avons créé un objet `Matrix` qui stocke de manière interne et privée le tableau de tableau de `boolean`. Au moment de la création (constructeur), la taille fixe est passée en paramètre, puis le tableau de tableau est automatiquement rempli aléatoirement. Cette classe contient des accesseurs (getters) et des modifieurs (setters), permettant d'accéder aux éléments et de les modifier, par leur position `(x, y)` dans la matrice. Par ailleurs, la méthode `toString()` est redéfinie pour afficher correctement la matrice comme demandé.
 
 Note sur la liaison dynamique des liens
 -------
 Afin de bénéficier du principe de liaison dynamique des liens, nous avons créé une classe abstraite `Operation` et trois sous-classes concrètes pour les opérations en elles-mêmes, selon le schéma ci-dessous. 
 
-![schéma](https://raw.githubusercontent.com/BinaryBrain/POO/master/05%20Matrices/operationstruct.png?token=AFPQ795F6Jw9y2gTZM2guJEDlYIB4yNcks5UV58SwA%3D%3D "Schéma d'héritage des opérations")
+![schéma](http://i.imgur.com/3NOxB8y.png "Schéma d'héritage des opérations")
 
 La classe abstraite contient une méthode abstraite `execute(a, b)` qui sera implémentée différemment par les sous-classes. Elle contient de plus une méthode concrète qui créé la matrice pour stocker le résultat et gère le parcours des matrices opérandes. Dans cette boucle, elle appelle `execute(a, b)` sur deux éléments.
 
@@ -33,4 +33,11 @@ Nous constatons qu'au moment de l'execution, la bonne méthode est appelée en f
 
 Annexes
 -----
-Le code imprimé est annexé. Il se compose des 4 opérations, de l'objet `Matrix` et d'un launcher (main) pour instancier les objets.
+Le code imprimé est annexé. Il se compose des 4 opérations, de l'objet `Matrix` et d'un launcher (`main`) pour instancier les objets. Vous trouverez de plus ci-après un exemple d'éxécution.
+
+Exemple d'exécution
+-----
+
+```
+TODO
+```
