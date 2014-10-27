@@ -1,18 +1,10 @@
 /*
  * File: Matrix.java
  * Date: 16 octobre 2014
- * Goal: Represent a square Matrix.
+ * Goal: Represent a square Matrix, of fixed size, with mutable elements.
  * Authors: Sacha Bron, Valentin Minder
  */
-
 package Main;
-/**
- * 
- * This class represent a boolean square matrix of fixed size, with mutable elements.
- * 
- * @author Valentin
- *
- */
 public class Matrix {
 	
 	/**
