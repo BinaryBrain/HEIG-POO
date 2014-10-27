@@ -1,3 +1,10 @@
+/*
+ * File: Matrix.java
+ * Date: 16 octobre 2014
+ * Goal: Represent a square Matrix.
+ * Authors: Sacha Bron, Valentin Minder
+ */
+
 package Main;
 /**
  * 

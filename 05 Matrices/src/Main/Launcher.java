@@ -1,3 +1,10 @@
+/*
+ * File: Launcher.java
+ * Date: 16 octobre 2014
+ * Goal: Uses Matrices and Operations to achive the lab goal. Contains the main.
+ * Authors: Sacha Bron, Valentin Minder
+ */
+
 package Main;
 import Operations.And;
 import Operations.Operation;

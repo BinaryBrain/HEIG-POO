@@ -1,3 +1,10 @@
+/*
+ * File: Operation.java
+ * Date: 16 octobre 2014
+ * Goal: Class representing an operation between two matrices.
+ * Authors: Sacha Bron, Valentin Minder
+ */
+
 package Operations;
 import Main.Matrix;
 
