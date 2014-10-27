@@ -35,6 +35,8 @@ Annexes
 -----
 Le code imprimé est annexé. Il se compose des 4 opérations, de l'objet `Matrix` et d'un launcher (`main`) pour instancier les objets. Vous trouverez de plus ci-après un exemple d'éxécution.
 
+<div style="page-break-after: always;"></div>
+
 Exemple d'exécution
 -----
 
