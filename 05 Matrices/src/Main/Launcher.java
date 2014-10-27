@@ -1,5 +1,6 @@
 package Main;
 import Operations.And;
+import Operations.Operation;
 import Operations.Or;
 import Operations.Xor;
 
@@ -22,10 +23,13 @@ public class Launcher {
 		System.out.println("Matrix two");
 		System.out.println(m2);
 		System.out.println("oneOrTwo = one or two");
-		System.out.println(new Or().executeOperation(m1, m2));
+		Operation op = new Or();
+		System.out.println(op.executeOperation(m1, m2));
 		System.out.println("oneAndTwo = one and two");
-		System.out.println(new And().executeOperation(m1, m2));
+		op = new And();
+		System.out.println(op.executeOperation(m1, m2));
 		System.out.println("oneXOrTwo = one xor two");
-		System.out.println(new Xor().executeOperation(m1, m2));
+		op = new Xor();
+		System.out.println(op.executeOperation(m1, m2));
 	}
 }
