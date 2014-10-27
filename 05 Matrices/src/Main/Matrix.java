@@ -51,6 +51,9 @@ public class Matrix {
      * @return the value of this element
      */
     public boolean getElement(int x, int y) {
+    	if (x < 0 || x >= getSize() || y < 0 || y >= getSize()) {
+			throw new IllegalArgumentException("x/y outside matrix bounds");
+		};
     	return matrix[x][y];
     }
     
@@ -61,6 +64,9 @@ public class Matrix {
      * @param value the new value
      */
     public void setElement (int x, int y, boolean value) {
+    	if (x < 0 || x >= getSize() || y < 0 || y >= getSize()) {
+			throw new IllegalArgumentException("x/y outside matrix bounds");
+		};
     	matrix[x][y] = value;
     }
     

@@ -3,6 +3,9 @@ import Main.Matrix;
 
 public abstract class Operation {
 	public Matrix executeOperation(Matrix a, Matrix b) {
+		if (a.getSize() != b.getSize()) {
+			throw new IllegalArgumentException("not the same size");
+		}
 		int size = a.getSize();
 		Matrix result = new Matrix(size);
 		
