@@ -13,6 +13,13 @@ public class Groupe {
 	private int trimestre;
 	
 	private String nom;
+        public Groupe(int numero, int orientation, int trimiestre, String nom)
+        {
+            this.nom = nom;
+            this.numero = numero;
+            this.orientation = orientation;
+            this.trimestre = trimiestre;
+        }
 	
 	public String horaire() {
 		// TODO
