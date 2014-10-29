@@ -5,7 +5,6 @@
  * Goal: ???
  */
 
-
 package labo6;
 
 public class Lecon {
@@ -14,7 +13,19 @@ public class Lecon {
 	private int periodeDebut;
 	private int duree;
 	private String salle;
-	
+
+	private Professeur prof;
+
+	public Lecon(String matiere, Professeur prof, int jourSemaine,
+			int periodeDebut, int duree, String salle) {
+		this.matiere = matiere;
+		this.prof = prof;
+		this.jourSemaine = jourSemaine;
+		this.periodeDebut = periodeDebut;
+		this.duree = duree;
+		this.salle = salle;
+	}
+
 	public String horaire(/* args */) {
 		// TODO
 		return null;
