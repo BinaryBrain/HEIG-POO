@@ -5,7 +5,6 @@
  * Goal: ???
  */
 
-
 package labo6;
 
 public class Lecon {
@@ -14,7 +13,7 @@ public class Lecon {
 	private int periodeDebut;
 	private int duree;
 	private String salle;
-	
+
 	public String horaire(/* args */) {
 		// TODO
 		return null;
