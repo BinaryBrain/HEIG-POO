@@ -12,22 +12,24 @@ public class Groupe {
 	private int orientation;
 	private int trimestre;
 	
+	private String nom;
+	
 	public String horaire() {
+		// TODO
 		return null;
-		
 	}
 	
 	public String nom() {
-		return null;
+		return nom;
 		
 	}
 	
 	public int nombreEtudiants() {
+		// TODO
 		return -1;
-		
 	}
 	
 	public void definirLecon(/* args */) {
-		
+		// TODO
 	}
 }

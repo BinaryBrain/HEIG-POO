@@ -16,6 +16,7 @@ public class Lecon {
 	private String salle;
 	
 	public String horaire(/* args */) {
+		// TODO
 		return null;
 	}
 }
