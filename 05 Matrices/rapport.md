@@ -33,7 +33,8 @@ Nous constatons qu'au moment de l'execution, la bonne méthode est appelée en f
 
 Annexes
 -----
-Le code imprimé est annexé. Il se compose des 4 opérations, de l'objet `Matrix` et d'un launcher (`main`) pour instancier les objets. Vous trouverez de plus ci-après un exemple d'éxécution.
+Le code imprimé est annexé. Il se compose des 4 opérations, de l'objet `Matrix` et d'un launcher  
+(`main`) pour instancier les objets. Vous trouverez de plus ci-après un exemple d'éxécution.
 
 <div style="page-break-after: always;"></div>
 
