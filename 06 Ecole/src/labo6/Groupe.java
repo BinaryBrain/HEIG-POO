@@ -7,12 +7,15 @@
 
 package labo6;
 
+import java.util.ArrayList;
+
 public class Groupe {
 	private int numero;
 	private int orientation;
 	private int trimestre;
 	
 	private String nom;
+	private ArrayList<Etudiant> etudiants;
 	
 	public String horaire() {
 		// TODO
@@ -25,8 +28,7 @@ public class Groupe {
 	}
 	
 	public int nombreEtudiants() {
-		// TODO
-		return -1;
+		return etudiants.size();
 	}
 	
 	public void definirLecon(/* args */) {
