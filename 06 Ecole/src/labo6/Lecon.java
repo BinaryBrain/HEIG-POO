@@ -25,8 +25,13 @@ public class Lecon {
 		this.duree = duree;
 		this.salle = salle;
 	}
+	
+	public Lecon(String matiere, int jourSemaine,
+			int periodeDebut, int duree, String salle) {
+		this(matiere, null, jourSemaine, periodeDebut, duree, salle);
+	}
 
-	public String horaire(/* args */) {
+	public static String horaire(/* args */) {
 		// TODO
 		return null;
 	}
