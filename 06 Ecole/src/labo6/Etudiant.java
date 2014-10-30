@@ -16,6 +16,6 @@ public class Etudiant extends Personne {
 	}
 
 	public String toString() {
-		return matricule + super.toString();
+		return "Etud." + super.toString() + "(#" + matricule + ")\n";
 	}
 }

@@ -20,6 +20,12 @@ public class Professeur extends Personne {
 	}
 
 	public String toString() {
-		return abreviation + super.toString();
+		return "Prof. " + super.toString() +  "(" +abreviation + ")\n" ;
 	}
+        public String horaire()
+        {
+            String horraire = "";
+            return horraire;
+        }
+        
 }
