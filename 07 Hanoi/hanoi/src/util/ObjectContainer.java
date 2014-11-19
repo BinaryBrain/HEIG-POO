@@ -14,6 +14,7 @@ public class ObjectContainer {
 	 * Donnee contenue par le conteneur.
 	 */
 	private Object data;
+
 	/**
 	 * Reference vers le conteneur predecesseur.
 	 */
@@ -42,7 +43,7 @@ public class ObjectContainer {
 	}
 
 	/**
-	 * Retourne le conteneur predecesseur.
+	 * Retourne la reference vers le conteneur predecesseur.
 	 * 
 	 * @return le predecesseur
 	 */
@@ -52,7 +53,7 @@ public class ObjectContainer {
 
 	/**
 	 * Retourne la reprensation sous forme de String de ce conteneur.
-	 * 
+	 * <p>
 	 * Il s'agit de l'appel toString() sur les donnees contenues.
 	 */
 	@Override
