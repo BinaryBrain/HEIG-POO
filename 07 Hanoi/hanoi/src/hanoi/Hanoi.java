@@ -54,8 +54,7 @@ public class Hanoi {
 	 */
 	public void solve(JHanoi frame) {
 		System.out.println("solving hanoi");
-		// TODO: not working.
-		// frame.display();
+		frame.display();
 		solve(size, 0, 2, 1, frame);
 		return;
 	}
@@ -104,8 +103,7 @@ public class Hanoi {
 			pileArrivee.empile(k);
 			turn++;
 			if (frame != null) {
-				// TODO: not working
-				// frame.display();
+				frame.display();
 			} else {
 				System.out.println("--- turn " + turn + " ---");
 				System.out.println("One:   " + piles[0]);
@@ -126,23 +124,14 @@ public class Hanoi {
 	 */
 	public int[][] status() {
 		System.out.println("get status");
-		int[][] ret = new int[3][size];
-		try {
-
-			Object[] ar = piles[0].toArray();
-			for (int i = 0, k = size - ar.length; k < size; i++, k++) {
-				ret[0][k] = (int) ar[i];
+		int[][] ret = new int[3][];
+		Object[] ar;
+		for (int j = 0; j < 3; j++) {
+			ar = piles[j].toArray();
+			ret[j] = new int[ar.length];
+			for (int i = 0; i < ar.length; i++) {
+				ret[j][i] = (int) ar[i];
 			}
-			ar = piles[1].toArray();
-			for (int i = 0, k = size - ar.length; k < size; i++, k++) {
-				ret[1][k] = (int) ar[i];
-			}
-			ar = piles[2].toArray();
-			for (int i = 0, k = size - ar.length; k < size; i++, k++) {
-				ret[2][k] = (int) ar[i];
-			}
-		} catch (ArrayIndexOutOfBoundsException e) {
-			e.printStackTrace();
 		}
 		return ret;
 	}
