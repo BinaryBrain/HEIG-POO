@@ -1,7 +1,6 @@
 package util;
 
 import java.util.EmptyStackException;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -100,39 +99,31 @@ public class Pile {
 	}
 
 	/**
-	 * Retourne un iterateur sur objet sur la pile.
+	 * Retourne un @link {@link Iterateur} sur objet sur la pile.
 	 * 
 	 * @return un iterateur sur la pile.
 	 */
-	public Iterator<Object> iterator() {
-		Iterator<Object> iter = new Iterator<Object>() {
+	public Iterateur iterateur() {
+		Iterateur iter = new Iterateur() {
 
 			/**
 			 * Reference vers l'objet en cours de manipulation dans cet
 			 * iterateur.
 			 */
-			private ObjectContainer current = head;
+			private ObjectContainer nextContainer = head;
 
-			/**
-			 * Permet de recuperer l'element suivant (s'il existe)
-			 */
-			@Override
-			public Object next() {
-				if (current == null) {
+			public Object suivant() {
+				if (nextContainer == null) {
 					throw new NoSuchElementException();
 				} else {
-					Object ret = current.getData();
-					current = current.getPred();
-					return ret;
+					Object nextData = nextContainer.getData();
+					nextContainer = nextContainer.getPred();
+					return nextData;
 				}
 			}
 
-			/**
-			 * Permet de tester la presence d'un element suivant dans la pile
-			 */
-			@Override
-			public boolean hasNext() {
-				return current != null;
+			public boolean possedeSuivant() {
+				return nextContainer != null;
 			}
 		};
 		return iter;

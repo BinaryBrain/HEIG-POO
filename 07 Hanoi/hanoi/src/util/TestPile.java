@@ -2,7 +2,6 @@ package util;
 
 import java.util.Arrays;
 import java.util.EmptyStackException;
-import java.util.Iterator;
 
 /**
  * Permet de tester toutes les fonctions publiques de Pile...
@@ -68,11 +67,11 @@ public class TestPile {
 		System.out.println(Arrays.toString(objectArray));
 
 		System.out.println("TEST: Iterateur");
-		Iterator<Object> iterator = pileTest.iterator();
-		System.out.println("HasNext()?:" + iterator.hasNext());
-		while (iterator.hasNext()) {
-			System.out.println("Next:" + iterator.next());
-			System.out.println("HasNext()?:" + iterator.hasNext());
+		Iterateur iter = pileTest.iterateur();
+		System.out.println("PossedeSuivant()?:" + iter.possedeSuivant());
+		while (iter.possedeSuivant()) {
+			System.out.println("Suivant:" + iter.suivant());
+			System.out.println("PossedeSuivant()?:" + iter.possedeSuivant());
 		}
 	}
 }
