@@ -5,6 +5,10 @@ import util.Pile;
 
 /**
  * Represente le classique probleme des Tours de Hanoi.
+ * <p>
+ * Trois piles sont utilisees pour representer l'etat courant des tours de
+ * Hanoi. Fournit une methode de resolutoon du problème, avec affichage
+ * graphique ou console, au choix.
  * 
  * @author Sacha Bron
  * @author Valentin Minder
@@ -13,39 +17,44 @@ import util.Pile;
 public class Hanoi {
 
 	/**
-	 * Represente les trois piles initialisees.
+	 * Represente les trois piles initialisees vides.
 	 */
-	private Pile[] piles = { new Pile(), new Pile(), new Pile() };
+	private Pile[] pilesArray = { new Pile(), new Pile(), new Pile() };
+
 	/**
 	 * Represente la taille maximale de la pile (definie par le nombre de
-	 * disques utilises)
+	 * disques utilises).
 	 */
 	private int size = 0;
+
 	/**
-	 * Represente le nombre de coup joues jusque là.
+	 * Represente le nombre de coup joues jusque la (initialisation = 0).
 	 */
 	private int turn = 0;
 
 	/**
-	 * Constructeur.
+	 * Constructeur (utilise pour resolution console et graphique).
 	 * 
 	 * @param disks
 	 *            nombre de disks
+	 * @throw {@link IllegalArgumentException} si le nombre de disque n'est pas
+	 *        strictement positif
 	 */
 	public Hanoi(int disks) {
 		if (disks <= 0) {
 			throw new IllegalArgumentException(
 					"Positive number of disks required!");
 		}
-		System.out.println("calling hanoi" + disks);
 		size = disks;
 		// remplissage de la premiere pile.
 		for (int i = 0; i < disks; i++) {
-			piles[0].empile(size - i);
+			pilesArray[0].empile(size - i);
 		}
 	}
 
 	/**
+	 * Resoud le probleme avec affichage de maniere "graphique".
+	 * <p>
 	 * Deplace tous les disques de la premiere aiguille à la troisieme en
 	 * affichant les etats successifs des aiguilles dans la fenetre frame,
 	 * instance de la classe hanoi.gui.JHanoi
@@ -53,52 +62,111 @@ public class Hanoi {
 	 * @param frame
 	 */
 	public void solve(JHanoi frame) {
-		System.out.println("solving hanoi");
 		frame.display();
-		solve(size, 0, 2, 1, frame);
+		solveHanoi(size, 0, 2, 1, frame);
 		return;
 	}
 
 	/**
-	 * Resoud le probleme de maniere "console" avec affichage.
+	 * Resoud le probleme avec affichage de maniere "console".
+	 * <p>
+	 * Deplace tous les disques de la premiere aiguille à la troisieme en
+	 * affichant les etats successifs des aiguilles dans la console.
 	 */
-	public void solve() {
+	public void solveConsoleOnly() {
 		System.out.println("--- turn " + turn + " ---");
-		System.out.println("One:   " + piles[0]);
-		System.out.println("Two:   " + piles[1]);
-		System.out.println("Three: " + piles[2]);
-		solve(size, 0, 2, 1, null);
+		System.out.println("One:   " + pilesArray[0]);
+		System.out.println("Two:   " + pilesArray[1]);
+		System.out.println("Three: " + pilesArray[2]);
+		solveHanoi(size, 0, 2, 1, null);
 	}
 
 	/**
-	 * Methode privee de resolution (affichage console ou graphique).
+	 * Methodes de resolution recursive de Hanoi (affichage console ou
+	 * graphique).
+	 * <p>
 	 * 
-	 * procedure Hanoi(n, D, A, I)
-	 * 
-	 * si n != 0
-	 * 
-	 * Hanoi(n-1, D, I, A)
-	 * 
-	 * Deplacer le disque de D vers A
-	 * 
-	 * Hanoi(n-1, I, A, D)
-	 * 
+	 * Explication par pseudo-code <br>
+	 * (n est le nombre de disque, D, A, I sont les piles respectivement de
+	 * depart, d'arrivee et intermediaire
+	 * <p>
+	 * procedure Hanoi(n, D, A, I) <br>
+	 * __si n != 0 <br>
+	 * ____Hanoi(n-1, D, I, A) // (1)<br>
+	 * ____Deplacer le disque de D vers A // (2) <br>
+	 * ____Hanoi(n-1, I, A, D) // (3)<br>
 	 * fin-procedure
+	 * <p>
+	 * 
+	 * Explication en francais: pour deplacer un pile de n disques de depart D a
+	 * arrivee A, il faut <br>
+	 * (1) deplacer la pile de n-1 disques (sans le plus grand disque) du depart
+	 * D a l'intermediaire I, <br>
+	 * (2) deplacer le plus grand cercle du depart D a l'arrivee A, <br>
+	 * (3) finalement deplacer de n-1 disques (sans le plus grand disque) la
+	 * pile de l'intermediaire I a l'arrive A.
+	 * 
+	 * <p>
+	 * Les index des piles doivent etre entre 0 et 2, et etre complets (chacune
+	 * des piles doit etre representee, donc tous differents et la somme doit
+	 * etre 0 + 1 + 2 = 3).
 	 *
 	 * @param numberOfDisks
-	 * @param nPileDepart
-	 * @param nPileArrivee
-	 * @param nPileInterm
+	 *            nombre de disques a deplacer
+	 * @param indexPileDepart
+	 *            index de la pile de depart
+	 * @param indexPileArrivee
+	 *            index de la pile d'arrivee
+	 * @param indexPileInterm
+	 *            index de la pile utilisee comme intermediaire
 	 * @param frame
-	 *            JHanoi Frame (peut etre null pour affichage console)
+	 *            JHanoi Frame (peut etre null pour affichage console
+	 *            uniquement)
 	 */
-	private void solve(int numberOfDisks, int nPileDepart, int nPileArrivee,
-			int nPileInterm, JHanoi frame) {
+	public void solveHanoi(int numberOfDisks, int indexPileDepart,
+			int indexPileArrivee, int indexPileInterm, JHanoi frame) {
+		// test des arguments...
+		if (numberOfDisks <= 0 || numberOfDisks > size) {
+			throw new IllegalArgumentException(
+					"Number of disks must be: 0 < disks <= size of Hanoi towers");
+		}
+		if (indexPileDepart + indexPileArrivee + indexPileInterm != 3) {
+			throw new IllegalArgumentException(
+					"Piles idnex must represent the three piles: 0, 1, 2, and their sum must be 3.");
+		}
+		if (indexPileDepart == indexPileArrivee
+				|| indexPileDepart == indexPileInterm
+				|| indexPileArrivee == indexPileInterm) {
+			throw new IllegalArgumentException(
+					"Piles idnex must represent the three piles: 0, 1, 2, and must be all different");
+		}
+		if (0 > indexPileDepart || 0 > indexPileArrivee || 0 > indexPileInterm
+				|| indexPileDepart > 2 || indexPileArrivee > 2
+				|| indexPileInterm > 2) {
+			throw new IllegalArgumentException(
+					"Piles idnex must represent the three piles: 0, 1, 2, and must be 0 <= index < 3");
+		}
+
+		// appel fonction privee
+		solveHanoiRecursive(numberOfDisks, indexPileDepart, indexPileArrivee,
+				indexPileInterm, frame);
+	}
+
+	/**
+	 * Voir ci dessus @link{@link Hanoi#solveHanoi(int, int, int, int, JHanoi)}
+	 */
+	private void solveHanoiRecursive(int numberOfDisks, int indexPileDepart,
+			int indexPileArrivee, int indexPileInterm, JHanoi frame) {
+		// condition d'arret de la recursion
 		if (numberOfDisks > 0) {
-			solve(numberOfDisks - 1, nPileDepart, nPileInterm, nPileArrivee,
-					frame);
-			Pile pileDepart = piles[nPileDepart];
-			Pile pileArrivee = piles[nPileArrivee];
+
+			// appel recursif
+			solveHanoiRecursive(numberOfDisks - 1, indexPileDepart,
+					indexPileInterm, indexPileArrivee, frame);
+
+			// deplacement courrant: UN objet de depart a arrivee
+			Pile pileDepart = pilesArray[indexPileDepart];
+			Pile pileArrivee = pilesArray[indexPileArrivee];
 			int k = (int) pileDepart.depile();
 			pileArrivee.empile(k);
 			turn++;
@@ -106,12 +174,14 @@ public class Hanoi {
 				frame.display();
 			} else {
 				System.out.println("--- turn " + turn + " ---");
-				System.out.println("One:   " + piles[0]);
-				System.out.println("Two:   " + piles[1]);
-				System.out.println("Three: " + piles[2]);
+				System.out.println("One:   " + pilesArray[0]);
+				System.out.println("Two:   " + pilesArray[1]);
+				System.out.println("Three: " + pilesArray[2]);
 			}
-			solve(numberOfDisks - 1, nPileInterm, nPileArrivee, nPileDepart,
-					frame);
+
+			// appel recursif
+			solveHanoiRecursive(numberOfDisks - 1, indexPileInterm,
+					indexPileArrivee, indexPileDepart, frame);
 		}
 	}
 
@@ -119,30 +189,36 @@ public class Hanoi {
 	 * Rend un tableau de tableaux représentant l’etat des aiguilles. Pour un
 	 * tel tableau t, l’element t[i][j] correspond a la taille du j-eme disque
 	 * (en partant du haut) de la i-eme aiguille.
+	 * <p>
+	 * Attention, le tableau n'est pas de taille 3 x n, car seules les cases
+	 * occupees sont representees! La 2e dimension n'est donc pas homogène!
 	 * 
-	 * @return
+	 * @return un tableau representant l'etat des piles
 	 */
 	public int[][] status() {
-		System.out.println("get status");
-		int[][] ret = new int[3][];
-		Object[] ar;
-		for (int j = 0; j < 3; j++) {
-			ar = piles[j].toArray();
-			ret[j] = new int[ar.length];
-			for (int i = 0; i < ar.length; i++) {
-				ret[j][i] = (int) ar[i];
+		int[][] statusIntIntArray = new int[3][];
+		Object[] statusPileIndexAsObjectArray;
+		for (int indexPile = 0; indexPile < 3; indexPile++) {
+			statusPileIndexAsObjectArray = pilesArray[indexPile].toArray();
+			statusIntIntArray[indexPile] = new int[statusPileIndexAsObjectArray.length];
+			for (int indexVertical = 0; indexVertical < statusPileIndexAsObjectArray.length; indexVertical++) {
+				statusIntIntArray[indexPile][indexVertical] = (int) statusPileIndexAsObjectArray[indexVertical];
 			}
 		}
-		return ret;
+		return statusIntIntArray;
 	}
 
 	/**
 	 * Rend true si la solution du probleme a ete atteinte, false sinon.
+	 * <p>
+	 * Retourne true si les pile 0 et 1 sont vides (et donc la pile 2 contient
+	 * tous les disques).
 	 * 
 	 * @return true si termine, false sinon.
 	 */
 	public boolean finished() {
-		return !piles[0].iterator().hasNext() && !piles[1].iterator().hasNext();
+		return !pilesArray[0].iterator().hasNext()
+				&& !pilesArray[1].iterator().hasNext();
 	}
 
 	/**

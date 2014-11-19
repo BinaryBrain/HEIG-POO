@@ -32,7 +32,7 @@ public class TestHanoi {
 		}
 
 		Hanoi h = new Hanoi(size);
-		h.solve();
+		h.solveConsoleOnly();
 
 		JHanoi j = new JHanoi();
 
