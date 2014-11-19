@@ -1,10 +1,11 @@
 package hanoi;
 
-import hanoi.gui.JHanoi;
-
 /**
- * Permet de tester les fonctions de resolution de Hanoi. Gere le mode graphique
- * et le mode console.
+ * Permet de tester les fonctions de resolution de Hanoi en mode console.
+ * 
+ * <p>
+ * Il est possible de preciser la taille des tours par argument, par defaut 4
+ * sans arguments.
  * 
  * @author Sacha Bron
  * @author Valentin Minder
@@ -12,8 +13,20 @@ import hanoi.gui.JHanoi;
  */
 public class TestHanoi {
 
+	/**
+	 * Taille par defaut des tours de Hanoi (sans argument)
+	 */
+	private static int defaultSize = 4;
+
+	/**
+	 * Launch the Hanoi tower in console mode.
+	 * <p>
+	 * arg[1] is the size of the tower (optionnal, default = 4).
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		int size = 4;
+		int size = defaultSize;
 		if (args.length > 0 && args[0] != null) {
 			String arg = args[0];
 			try {
@@ -31,11 +44,6 @@ public class TestHanoi {
 			}
 		}
 
-		Hanoi h = new Hanoi(size);
-		h.solveConsoleOnly();
-
-		JHanoi j = new JHanoi();
-
+		new Hanoi(size).solveConsoleOnly();
 	}
-
 }
