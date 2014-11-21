@@ -217,8 +217,8 @@ public class Hanoi {
 	 * @return true si termine, false sinon.
 	 */
 	public boolean finished() {
-		return !pilesArray[0].iterator().hasNext()
-				&& !pilesArray[1].iterator().hasNext();
+		return !pilesArray[0].iterateur().possedeSuivant()
+				&& !pilesArray[1].iterateur().possedeSuivant();
 	}
 
 	/**
