@@ -7,23 +7,31 @@
 
 package labo6;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Groupe {
 	private int numero;
 	private int orientation;
 	private int trimestre;
-	private ArrayList<Etudiant> etudiants;
-
-	private String nom;
-        public Groupe(int numero, int orientation, int trimiestre, String nom)
-        {
-            this.nom = nom;
-            this.numero = numero;
-            this.orientation = orientation;
-            this.trimestre = trimiestre;
-        }
+	private LinkedList<Etudiant> etudiants;
+	private LinkedList<Lecon> lecons;
 	
+	private String nom;
+
+	public Groupe(int numero, int orientation, int trimiestre, String nom, Etudiant... etudiants) {
+		this.nom = nom;
+		this.numero = numero;
+		this.orientation = orientation;
+		this.trimestre = trimiestre;
+		this.etudiants = (LinkedList<Etudiant>) Arrays.asList(etudiants);
+		
+		if(this.etudiants.size() < 1) {
+			System.err.println("Etudiants list is empty.");
+			throw new IllegalArgumentException();
+		}
+	}
+
 	public String horaire() {
 		// TODO
 		return null;
@@ -38,7 +46,7 @@ public class Groupe {
 		return etudiants.size();
 	}
 
-	public void definirLecon(/* args */) {
-		// TODO
+	public void definirLecons(Lecon... lecons) {
+		this.lecons.addAll(Arrays.asList(lecons));
 	}
 }

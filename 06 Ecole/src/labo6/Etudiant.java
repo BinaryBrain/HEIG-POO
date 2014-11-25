@@ -7,15 +7,26 @@
 
 package labo6;
 
+import java.util.UUID;
+
 public class Etudiant extends Personne {
 	private int matricule;
 
-	public Etudiant(String nom, String prenom, int matricule) {
+	public Etudiant(String nom, String prenom) {
 		super(nom, prenom);
-		this.matricule = matricule;
+		this.matricule = generateUniqueMatricule();
 	}
 
 	public String toString() {
 		return "Etud." + super.toString() + "(#" + matricule + ")\n";
+	}
+	
+	public int getMatricule() {
+		return matricule;
+	}
+	
+	private static int previousMatricule = 0;
+	public static int generateUniqueMatricule() {
+		return previousMatricule++;
 	}
 }
