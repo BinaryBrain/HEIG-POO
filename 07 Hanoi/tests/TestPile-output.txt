@@ -1,0 +1,35 @@
+TEST: taille pile vide:0
+TEST : vide au demarrage
+TEST: empile/depile.
+Empile:hello(1)
+Empile:world(2)
+Empile:my name is Bond (3)
+Empile:James Bond (4)
+TEST: taille pile plein:4
+Depile:James Bond (4)
+Depile:my name is Bond (3)
+Depile:world(2)
+Depile:hello(1)
+TEST: Depile: previsible : Pile vide!
+Empile:hello(1)
+Empile:world(2)
+Empile:my name is Bond (3)
+Empile:James Bond (4)
+TEST: ToString():[ <James Bond (4)> <my name is Bond (3)> <world(2)> <hello(1)> ]
+TEST: foreach on ToArray()
+James Bond (4)
+my name is Bond (3)
+world(2)
+hello(1)
+TEST Arrays.toString() on toArray()
+[James Bond (4), my name is Bond (3), world(2), hello(1)]
+TEST: Iterateur
+PossedeSuivant()?:true
+Suivant:James Bond (4)
+PossedeSuivant()?:true
+Suivant:my name is Bond (3)
+PossedeSuivant()?:true
+Suivant:world(2)
+PossedeSuivant()?:true
+Suivant:hello(1)
+PossedeSuivant()?:false
