@@ -11,6 +11,8 @@ Le but de ce laboratoire est de créer un programme capable de résoudre le fame
 Méthodologie et implémentation
 ------------------------------
 
+Il y a, comme pour beaucoup de problème en informatique, plusieurs manière d'aborder ce problème. Voici comment nous avons raisonné et procédé.
+
 ### Structure de données
 
 Comme les disques disques tours de Hanoï ne peuvent être mis ou enlevé que s'ils sont tout en haut, les piles (_stack_) semblent être la structure de données la plus favorable à ce problème.
@@ -29,15 +31,24 @@ Notre programme est constitué de plusieurs classes ayant des buts précis.
 - `Iterateur`: un itérateur permettant de traverser une pile.
 - `ObjectContainer`: un conteneur (_wrapper_) englobant un objet quelconque (`Object`) ainsi que le (`ObjectContainer`) précédant dans la pile-mère.
 
-### Tests
+### Programmes et Tests
 
-Des classes dédiées aux tests ont été créées. Il s'agit des classes `TestHanoi` (permettant de résoudre le problème des tours de Hanoi en console), `TestHanoiGUI` (permettant de tester l'interface graphique), et `TestPile` (qui contient des tests unitaires vérifiant le bon fonctionnement de la pile).  
-Ces trois classes contiennent une méthode `main` afin de pouvoir être lancée une à une, selon les besoins.
+Des classes dédiées aux tests ont été créées. Il s'agit des classes `TestHanoi` (permettant de résoudre le problème des tours de Hanoï en console), `TestHanoiGUI` (permettant de résoude le problème des tours de Hanoï avec l'interface graphique), et `TestPile` (qui contient des tests unitaires vérifiant le bon fonctionnement de la pile).  
+Ces trois classes contiennent une méthode `main` afin de pouvoir être lancée une à une, selon les besoins.	
 
 Schéma des classes
 ------------------
 
-**TODO inclure le schéma Slyum**
+Voici le schéma UML des classes.
+
+![UML](http://i.imgur.com/NosLUrV.png)
+
+_Note: un objet `JHanoi` est instancié au début du programme, en mode graphique. Cet objet va à son tour créer un objet `Hanoi`._ 
+
+Lancement du programme
+----------------------
+
+Le programme `TestHanoi` peut être lancé avec un entier en paramètre optionel. Il permet de spécifier le nombre de disque de la tour (4 par défault).
 
 Pour aller plus loin
 --------------------
@@ -50,12 +61,13 @@ En supposant des moines surentraînés capables de déplacer un disque à la sec
 
 ### Réponse
 
-Le nombre de coups à jouer pour déplacer n disques est _2^n - 1_. Ceci peut être facilement montré par une preuve par induction et vérifié à la main pour des petits nombres. Intuitivement, il faut déplacer _n-1_ disques du départ à l'intermédiaire, le dernier disque du départ à l'arrivée, puis _n-1_ disques de l'intermédiaire à l'arrivée.
+Le nombre de coups à jouer pour déplacer _n_ disques est _2^n - 1_. Ceci peut être facilement montré par une preuve par induction et vérifié à la main pour des petits nombres. Intuitivement, il faut déplacer _n-1_ disques du départ à l'intermédiaire, le dernier disque du départ à l'arrivée, puis _n-1_ disques de l'intermédiaire à l'arrivée.
 
 Donc itérativement:  
-_K(0) = 0_  
-_K(n) = 2 K(n-1) + 1_  
-donc la formule générale est: _K(n) = 2^n - 1_
+- _K(0) = 0_  
+- _K(n) = 2 K(n-1) + 1_  
+
+La formule générale est donc: **_K(n) = 2^n - 1_**
 
 Pour 64 disques à raison d'un mouvement par seconde, il faut donc _2^64 - 1_ secondes, soit _1.8446744e+19_ secondes.
 
@@ -63,14 +75,12 @@ Dans un milliard d'années, il y a _10^9 * 365 * 24 * 60 * 60 = 3.1536e+16_ seco
 
 Il faudra donc _(2^64 - 1) / 3.1536e+16 = 584.94 milliards d'années_ aux moins pour déplacer tous les disques.
 
-En soustrayant les 13.7 milliards d'années s'étant déjà écoulés depuis le Big Bang, il reste donc a priori 571.24 milliards d'années à l'univers, selon cette tradition.
+En soustrayant les 13.7 milliards d'années s'étant déjà écoulés depuis le Big Bang, il reste donc a priori **_571.24 milliards d'années_** à l'univers, selon cette tradition.
 
 Conclusion
 ----------
 
-Nous pouvons constaté que la résolution de ce problème est de plus en plus longue. En effet, sa complexité algorithmique optimale est en O(2^n), ce qui est relativement lourd par rapport aux algorithme que nous avons l'habitude d'utiliser en informatique.
-
-**TODO Suite de la conclusion**
+Nous pouvons constaté que la résolution de ce problème est de plus en plus longue. En effet, sa complexité algorithmique optimale est en _O(2^n)_, ce qui est relativement lourd par rapport aux algorithme que nous avons l'habitude d'utiliser en informatique.
 
 Annexes
 -------
