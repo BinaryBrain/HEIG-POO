@@ -45,14 +45,16 @@ Pour aller plus loin
 Selon la légende, des moines déplacent sans arrêt de lourds disques de métal d'une aiguille à l'autre.
 
 ### Question
+
 En supposant des moines surentraînés capables de déplacer un disque à la seconde, combien de temps reste-t-il avant que l’univers disparaisse (celui-ci a actuellement 13,7 milliards d’années)?
 
 ### Réponse
 
 Le nombre de coups à jouer pour déplacer n disques est _2^n - 1_. Ceci peut être facilement montré par une preuve par induction et vérifié à la main pour des petits nombres. Intuitivement, il faut déplacer _n-1_ disques du départ à l'intermédiaire, le dernier disque du départ à l'arrivée, puis _n-1_ disques de l'intermédiaire à l'arrivée.
-Donc itérativement:
-_K(0) = 0_
-_K(n) = 2 K(n-1) + 1_
+
+Donc itérativement:  
+_K(0) = 0_  
+_K(n) = 2 K(n-1) + 1_  
 donc la formule générale est: _K(n) = 2^n - 1_
 
 Pour 64 disques à raison d'un mouvement par seconde, il faut donc _2^64 - 1_ secondes, soit _1.8446744e+19_ secondes.
@@ -66,8 +68,9 @@ En soustrayant les 13.7 milliards d'années s'étant déjà écoulés depuis le 
 Conclusion
 ----------
 
-Nous pouvons constaté que la résolution de ce problème est de plus en plus longue.  
-**TODO de combien? Suite de la conclusion**
+Nous pouvons constaté que la résolution de ce problème est de plus en plus longue. En effet, sa complexité algorithmique optimale est en O(2^n), ce qui est relativement lourd par rapport aux algorithme que nous avons l'habitude d'utiliser en informatique.
+
+**TODO Suite de la conclusion**
 
 Annexes
 -------
