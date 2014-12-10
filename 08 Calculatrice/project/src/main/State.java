@@ -86,7 +86,9 @@ public class State {
 	}
 
 	/**
-	 * Inverse the sign of the current value.
+	 * Inverse the sign of the current value. WARNING: IN OUR COMPREHENSION,
+	 * THIS IS A UNARY OPERATOR WHICH IS VALID ON ANY VALID VALUE (MUTABLE OR
+	 * NOT), CONTRARY TO DIGIT OR DOT, WHICH ARE ONLY ALLOWED ON MUTABLE VALUES.
 	 */
 	public void inverseSign() {
 		double val = value();
