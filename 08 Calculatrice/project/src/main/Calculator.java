@@ -5,6 +5,14 @@ import java.util.Scanner;
 
 import operator.*;
 
+/**
+ * This class represent the usage of the Calculator from a terminal/console. It
+ * allows the user to enter values and operators with the keyboard, and the
+ * state of the current value and stack is printed after each operations.
+ * 
+ * @author Sacha Bron
+ * @author Valentin Minder
+ */
 public class Calculator {
 
 	public static void main(String[] args) {

@@ -3,7 +3,13 @@ package main;
 import util.Pile;
 
 /**
- * This is singleton class.
+ * This class is the Model of the state of the Calculator. It stores the stack,
+ * the current value, the memory value, and react to controllers (called by
+ * different operators). This is singleton class as there is a single calculator
+ * for a program.
+ * 
+ * @author Sacha Bron
+ * @author Valentin Minder
  */
 public class State {
 
@@ -303,5 +309,4 @@ public class State {
 	public Object[] getStackState() {
 		return pile.toArray();
 	}
-
 }

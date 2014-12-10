@@ -4,6 +4,7 @@ package main;
  * JCalculator.java
  *
  * Pier Donini, 9 Jan 2004.
+ * edited by Minder Valentin and Bron Sacha on Dec 11 2014.
  */
 
 import javax.swing.*;
