@@ -3,7 +3,7 @@ package operator;
 import main.State;
 
 public class MinusOperator extends TwoOperandCalculOperator {
-	public void execute() {
+	public void exec() {
 		State.getInstance().operandMinus();
 	}
 }

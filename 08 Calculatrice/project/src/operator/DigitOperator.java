@@ -1,4 +1,5 @@
 package operator;
+
 import main.State;
 
 public class DigitOperator extends NumberOperator {
@@ -9,7 +10,7 @@ public class DigitOperator extends NumberOperator {
 		myValue = value;
 	}
 
-	public void execute() {
+	public void exec() {
 		State.getInstance().addDigit(myValue);
 	}
 }

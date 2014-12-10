@@ -1,32 +1,16 @@
 package main;
 
-import java.util.EmptyStackException;
-
 import util.Pile;
 
 /**
- * SINGLETON!
+ * This is singleton class.
  */
 public class State {
 
+	/**
+	 * Private reference to the unique instance of State.
+	 */
 	private static State myInstance;
-
-	private String strValue = "";
-	// TODO: gerer erreur, plus message ?!?
-	private boolean error = false;
-	private String memory;
-
-	private Pile pile;
-
-	private void clear() {
-		clearError();
-		pile = new Pile();
-	}
-
-	private void clearError() {
-		error = false;
-		strValue = "";
-	}
 
 	/**
 	 * Private constructor.
@@ -35,6 +19,12 @@ public class State {
 		clear();
 	}
 
+	/**
+	 * Public getInstance of the State. If not exists, creates a new one.
+	 * Otherwise, returns the same state.
+	 * 
+	 * @return the unique instance of State.
+	 */
 	public static State getInstance() {
 		if (myInstance == null) {
 			myInstance = new State();
@@ -42,56 +32,126 @@ public class State {
 		return myInstance;
 	}
 
-	// always valid
-	public void addDigit(int digit) {
-		strValue += digit;
+	// INTERNAL STATE
+	// value currently printed
+	private String currentStrValue;
+	// value stored in memory by MS
+	private String memory;
+	// if the current value has an error
+	private boolean error;
+	// error displayed to the user
+	private String errorMessage;
+	// if the value is mutable (while typing) or not (after a result)
+	private boolean isMutable = true;
+	// reference to the stack of computed values
+	private Pile pile;
+
+	/**
+	 * Clear all the machine, including the stack and memory.
+	 */
+	private void clear() {
+		clearError();
+		pile = new Pile();
+		memory = "";
 	}
 
-	// always valid
+	/**
+	 * Clear only the error on the current value.
+	 */
+	private void clearError() {
+		currentStrValue = "";
+		error = false;
+		errorMessage = "";
+		isMutable = true;
+	}
+
+	// NUMERICAL OPERATORS.
+	/**
+	 * To be called before a numerical operator. If it's not mutable, push the
+	 * value to stack in order to enter a new value and keep the old one in the
+	 * stack.
+	 */
+	public boolean checkNumericalOperator() {
+		if (!isMutable) {
+			push();
+		}
+		return !error;
+	}
+
+	/**
+	 * Add a digit at the end of the current value.
+	 */
+	public void addDigit(int digit) {
+		currentStrValue += digit;
+	}
+
+	/**
+	 * Inverse the sign of the current value.
+	 */
 	public void inverseSign() {
-		if (value() < 0) {
-			// TODO: marche pas ?!?
-			strValue.substring(1, strValue.length());
-		} else {
-			strValue = "-" + strValue;
+		double val = value();
+		if (!error) {
+			if (val < 0) {
+				currentStrValue = currentStrValue.substring(1,
+						currentStrValue.length());
+			} else if (val > 0) {
+				currentStrValue = "-" + currentStrValue;
+			}
 		}
 	}
 
-	// TODO may not be valid!
+	/**
+	 * Add a dot at the end of the current value (plus a leading 0 if the value
+	 * is currently empty)
+	 */
 	public void addDot() {
-		strValue += ".";
+		if (currentStrValue.length() == 0) {
+			currentStrValue += "0";
+		}
+		currentStrValue += ".";
 	}
 
-	// TODO: checks
-	private boolean checkTwoOperands() {
-		return true;
+	// OPERATORS
+	/**
+	 * Checks that it's allowed to compute a two operands operator (the current
+	 * value must be valid and the stack must have a least one element)
+	 */
+	public boolean beforeTwoOperands() {
+		return beforeOneOperand() && hasNext();
 	}
 
-	private boolean checkOneOperand() {
-		return true;
+	/**
+	 * Checks that it's allowed to compute a single operand operator (the
+	 * current value must be valid)
+	 */
+	public boolean beforeOneOperand() {
+		value();
+		return !error;
 	}
 
 	public void operandDiv() {
-		setValue(head() / value());
+		setValue(pop() / value());
 	}
 
 	public void operandTimes() {
-		setValue(head() * value());
+		setValue(pop() * value());
 	}
 
 	public void operandPlus() {
-		setValue(head() + value());
+		setValue(pop() + value());
 	}
 
 	public void operandMinus() {
-		setValue(head() - value());
+		setValue(pop() - value());
 	}
 
 	public void operandOver() {
 		if (value() == 0) {
-			// TODO error!!
+			error = true;
+			errorMessage = "Div. by 0 not allowed!";
+		} else {
+			setValue(1 / value());
 		}
-		setValue(1 / value());
 	}
 
 	public void operandSquare() {
@@ -102,74 +162,143 @@ public class State {
 		setValue(Math.sqrt(value()));
 	}
 
+	// CONTROLS
+	/**
+	 * Push the value to stack
+	 */
 	public void controlEnter() {
-		// TODO: verifier erreur
-		push(value());
-		clearError();
+		push();
 	}
 
+	/**
+	 * Only if the current value is mutable (not a computed result), removes the
+	 * last digit inserted (including dot)
+	 */
 	public void controlBackSpace() {
-		if (strValue.length() > 0) {
-			// !! 0.0 verifier TODO
-			strValue = strValue.substring(0, strValue.length() - 1);
+		if (isMutable) {
+			if (currentStrValue.length() > 0) {
+				// !! 0.0 verifier TODO
+				currentStrValue = currentStrValue.substring(0,
+						currentStrValue.length() - 1);
+			}
 		}
 	}
 
+	/**
+	 * Stores the current value (only if valid) in the memory, and leave it in
+	 * the current value.
+	 */
 	public void controlMemoryStore() {
-		// TODO: uniquement si pas d'erreur
-		memory = strValue;
-		clearError();
+		value();
+		if (!error) {
+			memory = currentStrValue;
+		}
 	}
 
+	/**
+	 * Delete the current value (clearError) and replace it by the memory, which
+	 * is non mutable;
+	 */
 	public void controlMemoryRecall() {
-		strValue = memory;
+		clearError();
+		currentStrValue = memory;
+		isMutable = false;
 	}
 
+	/**
+	 * Clear all the machine.
+	 */
 	public void controlClear() {
 		clear();
 	}
 
+	/**
+	 * Clear the error of the current value.
+	 */
 	public void controlClearError() {
 		clearError();
 	}
 
-	private void push(double val) {
-		// TODO: verifier erreur
-		pile.empile(val);
-	}
-
-	private double head() {
-		// TODO: mieux gerer la fin de pile!!
-		try {
-			return (double) pile.depile();
-		} catch (EmptyStackException e) {
-			return 0; // TODO: non
+	// INSIDE STATE MANAGEMENT
+	/**
+	 * Push the value (only if valid) on the stack.
+	 */
+	private void push() {
+		double val = value();
+		if (!error) {
+			pile.empile(val);
+			clearError();
 		}
 	}
 
+	/**
+	 * Returns the last inserted value in the stack.
+	 */
+	private double pop() {
+		if (hasNext()) {
+			return (double) pile.depile();
+		}
+		return 0;
+	}
+
+	/**
+	 * Checks if the stack has a next value, and stores an error if yes.
+	 */
+	private boolean hasNext() {
+		if (pile.getSize() == 0) {
+			error = true;
+			errorMessage = "Empty stack! Operation not allowed!";
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Computes the numerical double value of the current value.
+	 */
 	private double value() {
 		try {
-			if (strValue.length() == 0) {
+			if (currentStrValue.length() == 0) {
 				return 0;
 			}
-			return Double.valueOf(strValue);
+			return Double.valueOf(currentStrValue);
 		} catch (NumberFormatException e) {
 			error = true;
-			return -1; // TODO: "ERROR: " + strValue;
+			errorMessage = "Format error:" + currentStrValue;
+			return 0;
 		}
-
 	}
 
+	/**
+	 * Set the string current value
+	 * 
+	 * @param d
+	 *            the new numerical value.
+	 */
 	private void setValue(double d) {
-		strValue = Double.toString(d);
+		currentStrValue = Double.toString(d);
+		isMutable = false;
 	}
 
-	public String valueStr() {
-		// TODO: message d'erreur ?
-		return Double.toString(value());
+	// INTERACTION WITH OUTSIDE
+	/**
+	 * Getter for the current value as string representation. Returns the error
+	 * message if appropriate.
+	 */
+	public String getValueString() {
+		if (error) {
+			return errorMessage;
+		}
+		if (currentStrValue.length() == 0) {
+			return "0";
+		}
+		return currentStrValue;
 	}
 
-	public Object[] stack() {
+	/**
+	 * Get the stack state as an Object array.
+	 */
+	public Object[] getStackState() {
 		return pile.toArray();
 	}
 

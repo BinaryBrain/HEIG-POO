@@ -1,9 +1,10 @@
 package operator;
+
 import main.State;
 
 public class DotOperator extends NumberOperator {
 
-	public void execute() {
+	public void exec() {
 		State.getInstance().addDot();
 	}
 }

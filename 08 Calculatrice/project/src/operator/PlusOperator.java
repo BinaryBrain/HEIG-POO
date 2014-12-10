@@ -3,7 +3,7 @@ package operator;
 import main.State;
 
 public class PlusOperator extends TwoOperandCalculOperator {
-	public void execute() {
+	public void exec() {
 		State.getInstance().operandPlus();
 	}
 }
