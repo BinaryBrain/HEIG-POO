@@ -12,7 +12,6 @@ import operator.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Time;
 
 public class JCalculator extends JFrame {
 	// Tableau representant une pile vide
@@ -34,6 +33,11 @@ public class JCalculator extends JFrame {
 		// Modifier une zone de texte, JTextField.setText(string nom)
 		// Modifier un composant liste, JList.setListData(Object[] tableau)
 		jNumber.setText(State.getInstance().valueStr());
+		Object [] stack = State.getInstance().stack();
+		if (stack.length == 0) {
+			stack = empty;
+		} 
+		jStack.setListData(stack);
 	}
 
 	/*
