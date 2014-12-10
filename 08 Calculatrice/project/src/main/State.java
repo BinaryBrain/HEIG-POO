@@ -113,10 +113,14 @@ public class State {
 	 * is currently empty)
 	 */
 	public void addDot() {
+		// leading 0 is needed in order to have 0.45 and not .45
 		if (currentStrValue.length() == 0) {
 			currentStrValue += "0";
 		}
-		currentStrValue += ".";
+		// only added if no dot is found so far.
+		if (!currentStrValue.contains(".")) {
+			currentStrValue += ".";
+		}
 	}
 
 	// OPERATORS
@@ -138,7 +142,12 @@ public class State {
 	}
 
 	public void operandDiv() {
-		setValue(pop() / value());
+		if (value() == 0) {
+			error = true;
+			errorMessage = "div by 0 not allowed!";
+		} else {
+			setValue(pop() / value());
+		}
 	}
 
 	public void operandTimes() {
@@ -167,7 +176,12 @@ public class State {
 	}
 
 	public void operandSqrt() {
-		setValue(Math.sqrt(value()));
+		if (value() < 0) {
+			error = true;
+			errorMessage = "sqrt not allowed for values < 0!";
+		} else {
+			setValue(Math.sqrt(value()));
+		}
 	}
 
 	// CONTROLS
@@ -285,6 +299,15 @@ public class State {
 	 */
 	private void setValue(double d) {
 		currentStrValue = Double.toString(d);
+		if (currentStrValue.equalsIgnoreCase("Infinity")
+				|| currentStrValue.equalsIgnoreCase("-Infinity")) {
+			error = true;
+			errorMessage = "Limit reached: +/- infinity result.";
+		} else
+			if (currentStrValue.equalsIgnoreCase("NaN")) {
+			error = true;
+			errorMessage = "Error NaN: last action produced Not A Number value";
+		}
 		isMutable = false;
 	}
 
