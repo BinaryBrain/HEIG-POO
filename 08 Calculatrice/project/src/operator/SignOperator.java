@@ -4,7 +4,7 @@ import main.State;
 
 public class SignOperator extends NumberOperator {
 
-	public void exec() {
+	void exec() {
 		State.getInstance().inverseSign();
 	}
 }

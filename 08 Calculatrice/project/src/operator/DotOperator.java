@@ -4,7 +4,7 @@ import main.State;
 
 public class DotOperator extends NumberOperator {
 
-	public void exec() {
+	void exec() {
 		State.getInstance().addDot();
 	}
 }

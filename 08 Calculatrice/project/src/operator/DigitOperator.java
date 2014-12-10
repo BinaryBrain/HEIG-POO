@@ -10,7 +10,7 @@ public class DigitOperator extends NumberOperator {
 		myValue = value;
 	}
 
-	public void exec() {
+	void exec() {
 		State.getInstance().addDigit(myValue);
 	}
 }

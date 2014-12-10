@@ -7,7 +7,7 @@ public abstract class Operator {
 		}
 	}
 
-	abstract public void exec();
+	abstract void exec();
 
-	abstract public boolean checkShouldExecute();
+	abstract boolean checkShouldExecute();
 }

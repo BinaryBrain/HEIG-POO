@@ -3,7 +3,7 @@ package operator;
 import main.State;
 
 public class TimesOperator extends TwoOperandCalculOperator {
-	public void exec() {
+	void exec() {
 		State.getInstance().operandTimes();
 	}
 }

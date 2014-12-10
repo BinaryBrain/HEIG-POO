@@ -3,9 +3,9 @@ package operator;
 import main.State;
 
 public abstract class TwoOperandCalculOperator extends CalculOperator {
-	abstract public void exec();
+	abstract void exec();
 
-	public boolean checkShouldExecute() {
+	boolean checkShouldExecute() {
 		return State.getInstance().beforeTwoOperands();
 	}
 }
