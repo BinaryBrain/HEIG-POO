@@ -98,3 +98,5 @@ Schéma des classes
 Voici le schéma UML des classes.
 
 ![UML](http://i.imgur.com/IgXsx7w.png)
+
+_Note: le nom de plusieurs classes (notamment les opérateurs) a été modifié pour plus de lisibilité._
